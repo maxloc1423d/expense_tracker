@@ -1,15 +1,14 @@
-#
-# Build stage
-#
-FROM maven:3.8.3-openjdk-17 AS build
-COPY . .
-RUN mvn clean install
+# Use a Java 17 base image (match your Spring Boot version)
+FROM eclipse-temurin:17-jdk-alpine
 
-#
-# Package stage
-#
-FROM eclipse-temurin:17-jdk
-COPY --from=build /target/your-build.jar demo.jar
-# ENV PORT=8080
+# Set working directory inside container
+WORKDIR /app
+
+# Copy the Maven/Gradle build JAR file (adjust filename)
+COPY target/expense-tracker-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port (match server.port in application.properties if set)
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","demo.jar"]
+
+# Command to run the JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]
