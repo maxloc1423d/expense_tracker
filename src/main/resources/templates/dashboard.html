@@ -77,12 +77,12 @@
     </style>
 </head>
 <body>
-    <h2>Dashboard</h2>
+    <h2 style="display:inline;">Dashboard</h2>
 
     <div class="nav-container">
 		<div class="username" th:text="'Hello, ' + ${username}"></div>
         <a class="add-expense-btn" th:href="@{/expense/add}">Add New Expense</a>
-        <a class="logout-btn" th:href="@{/logout}">Logout</a>
+       
     </div>
 
     <h3>Expense List</h3>
@@ -105,8 +105,8 @@
                 <td th:text="${expense.createdAt}"></td>
                 <td th:text="${expense.updatedAt}"></td>
                 <td>
-                    <a th:href="@{'/expense/edit/' + ${expense.id}}">Edit</a> |
-                    <a th:href="@{'/expense/delete/' + ${expense.id}}">Delete</a>
+                    <a th:href="@{'/expense/edit/' + ${expense.id}}" style="background-color: #f0f0f0; padding: 5px 10px; text-decoration: none; color: #333; border-radius: 4px;">Edit</a> |
+                    <a th:href="@{'/expense/delete/' + ${expense.id}}" style="background-color: #f0f0f0; padding: 5px 10px; text-decoration: none; color: #333; border-radius: 4px;">Delete</a>
                 </td>
             </tr>
         </tbody>
