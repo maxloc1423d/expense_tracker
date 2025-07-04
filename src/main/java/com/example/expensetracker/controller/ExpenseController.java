@@ -25,12 +25,14 @@ public class ExpenseController {
         if (user == null) return "redirect:/login";
 
         model.addAttribute("expenses", expenseService.listExpenses(user));
-
         Map<String, Double> categoryData = expenseService.getCategoryWiseTotals(user);
         model.addAttribute("categoryData", categoryData);
+        
+        model.addAttribute("username", user.getUsername()); // ✅ Add this line
 
         return "dashboard";
     }
+
 
     @GetMapping("/expense/add")
     public String addExpenseForm(Model model) {
