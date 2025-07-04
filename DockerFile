@@ -1,14 +1,24 @@
-# Use a Java 17 base image (match your Spring Boot version)
-FROM eclipse-temurin:17-jdk-alpine
+# Use a JDK base image to build the application
+FROM eclipse-temurin:22-jdk AS build
 
-# Set working directory inside container
 WORKDIR /app
 
-# Copy the Maven/Gradle build JAR file (adjust filename)
-COPY target/expense-tracker-0.0.1-SNAPSHOT.jar app.jar
+# Copy the entire project
+COPY . .
 
-# Expose port (match server.port in application.properties if set)
-EXPOSE 8080
+# Make the Maven wrapper executable (important for Linux)
+RUN chmod +x mvnw
 
-# Command to run the JAR
+# Build the Spring Boot app
+RUN ./mvnw clean package -DskipTests
+
+# Use a smaller JRE image to run the app
+FROM eclipse-temurin:22-jre
+
+WORKDIR /app
+
+# Copy the compiled JAR to the final image
+COPY --from=build /app/target/expensetracker-0.0.1-SNAPSHOT.jar app.jar
+
+# Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
