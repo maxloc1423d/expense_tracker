@@ -35,7 +35,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // Optional: expose the AuthenticationManager bean if needed
+    
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

@@ -28,7 +28,7 @@ public class ExpenseController {
         Map<String, Double> categoryData = expenseService.getCategoryWiseTotals(user);
         model.addAttribute("categoryData", categoryData);
         
-        model.addAttribute("username", user.getUsername()); // ✅ Add this line
+        model.addAttribute("username", user.getUsername()); 
 
         return "dashboard";
     }
