@@ -33,6 +33,12 @@
             font-weight: bold;
             text-align: center;
         }
+		.username {
+		    font-weight: bold;
+		    font-size: 16px;
+		    color: #333;
+		}
+
 
         .logout-btn {
             padding: 10px 20px;
@@ -74,6 +80,7 @@
     <h2>Dashboard</h2>
 
     <div class="nav-container">
+		<div class="username" th:text="'Hello, ' + ${username}"></div>
         <a class="add-expense-btn" th:href="@{/expense/add}">Add New Expense</a>
         <a class="logout-btn" th:href="@{/logout}">Logout</a>
     </div>
